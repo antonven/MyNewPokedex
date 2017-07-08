@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyNewPokedex</string>
+    <string name="label">Label</string>
+    <string name="pokemon">Pokemon</string>
+    <string name="berries">Berries</string>
+    <string name="items">Items</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_pokemon_data">PokemonDataActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
