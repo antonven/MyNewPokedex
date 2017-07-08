@@ -1,12 +1,22 @@
 package myapps.wycoco.com.mynewpokedex.Fragments;
 
+import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +82,7 @@ public class PokemonInfoFragment extends Fragment {
     private void JsonRequest(){
         JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, "http://pokeapi.co/api/v2/pokemon/" + id + "/",
                 new Response.Listener<JSONObject>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onResponse(JSONObject response) {
                         if(response != null) {
@@ -79,17 +90,26 @@ public class PokemonInfoFragment extends Fragment {
                             try {
                                 JSONArray jsonArray1 = response.getJSONArray("types");
                                 Log.e("ANTON VEN", "naabot diri2");
+                                String height = response.getString("height");
+                                String weight = response.getString("weight");
 
                                 for (int o = 0; o < jsonArray1.length(); o++) {
                                     JSONObject pokemonmon = jsonArray1.getJSONObject(o);
 
                                     JSONObject jsonObject4 = pokemonmon.getJSONObject("type");
                                     pokeType.append(jsonObject4.getString("name").toUpperCase());
-//                                    if(jsonObject4.getString("name").equals("fire")){
-//
-//                                    }
+                                    if(jsonObject4.getString("name").equals("fire")){
+                                        Window w = getActivity().getWindow();
+                                        w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                                        w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                                        w.setStatusBarColor(getContext().getResources().getColor(R.color.darkRed));
+
+
+                                    }
 
                                 }
+                                pokeHeight.setText(height + " cm");
+                                pokeWeight.setText(weight + " kg");
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }

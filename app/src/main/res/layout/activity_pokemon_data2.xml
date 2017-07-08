@@ -66,8 +66,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:layout_alignBaseline="@+id/a"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="14sp"
+            android:typeface="monospace"
             android:layout_below="@+id/pokeName"
             android:layout_toRightOf="@+id/a"
             android:layout_marginLeft="11dp"
@@ -80,20 +82,22 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="Weight: "
-            android:layout_below="@+id/pokeType"
+            android:id="@+id/s"
+            android:layout_below="@+id/a"
             android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:id="@+id/s" />
+            android:layout_toEndOf="@+id/imageView" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="Weight: "
             android:id="@+id/pokeWeight"
-            android:layout_below="@+id/pokeType"
-            android:layout_alignLeft="@+id/pokeType" />
+            android:layout_alignBaseline="@+id/s"
+            android:layout_alignBottom="@+id/s"
+            android:layout_toRightOf="@+id/s"
+            android:layout_toEndOf="@+id/s" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,21 +106,22 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_below="@+id/pokeWeight"
+            android:id="@+id/d"
+            android:layout_below="@+id/s"
             android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:id="@+id/d" />
+            android:layout_toEndOf="@+id/imageView" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:padding="5dp"
             android:text="Height: "
             android:id="@+id/pokeHeight"
-            android:layout_below="@+id/pokeWeight"
-            android:layout_alignLeft="@+id/pokeWeight"
-            android:layout_alignStart="@+id/pokeWeight" />
+            android:layout_alignBaseline="@id/d"
+            android:layout_alignBottom="@+id/d"
+            android:layout_toRightOf="@+id/s"
+            android:layout_toEndOf="@+id/s" />
         <!--<TextView-->
             <!--android:id="@+id/pokeVersion"-->
             <!--android:layout_width="wrap_content"-->
