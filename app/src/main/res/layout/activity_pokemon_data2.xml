@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="myapps.wycoco.com.mynewpokedex.Activities.PokemonDataActivity">
+    android:background="#000"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,21 +15,38 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_margin="15dp"
-            android:elevation="10dp"/>
+            android:layout_height="150dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignStart="@+id/imageView2"
+            android:layout_marginLeft="29dp"
+            android:paddingRight="10dp"
+            android:layout_marginStart="29dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView2"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/pokeball"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:id="@+id/pokeName"
             android:layout_width="200dp"
             android:layout_height="40dp"
+            android:textColor="#fff"
             android:layout_alignTop="@+id/imageView"
             android:layout_toEndOf="@+id/imageView"
             android:layout_toRightOf="@+id/imageView"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="BALBASAUR"
-            android:textSize="20dp"
+            android:textSize="26dp"
             android:textStyle="bold" />
 
         <TextView
@@ -38,16 +55,19 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:text="Type: "
-            android:layout_below="@+id/pokeName"
             android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_below="@+id/pokeName" />
         <TextView
             android:id="@+id/pokeType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Type: "
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:layout_below="@+id/pokeName"
             android:layout_toRightOf="@+id/a"
             android:layout_marginLeft="11dp"
@@ -56,6 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:text="Weight: "
             android:layout_below="@+id/pokeType"
@@ -66,6 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:text="Weight: "
             android:id="@+id/pokeWeight"
             android:layout_below="@+id/pokeType"
@@ -75,6 +99,8 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Height: "
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_below="@+id/pokeWeight"
             android:layout_toRightOf="@+id/imageView"
@@ -83,21 +109,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="18sp"
             android:padding="5dp"
             android:text="Height: "
             android:id="@+id/pokeHeight"
             android:layout_below="@+id/pokeWeight"
             android:layout_alignLeft="@+id/pokeWeight"
             android:layout_alignStart="@+id/pokeWeight" />
-        <TextView
-            android:id="@+id/pokeVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Version: "
-            android:layout_below="@+id/pokeHeight"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+        <!--<TextView-->
+            <!--android:id="@+id/pokeVersion"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="Version: "-->
+            <!--android:layout_below="@+id/pokeHeight"-->
+            <!--android:layout_toRightOf="@+id/imageView"-->
+            <!--android:layout_toEndOf="@+id/imageView" />-->
     </RelativeLayout>
 
 

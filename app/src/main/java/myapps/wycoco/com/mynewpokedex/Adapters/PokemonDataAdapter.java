@@ -1,8 +1,10 @@
 package myapps.wycoco.com.mynewpokedex.Adapters;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import myapps.wycoco.com.mynewpokedex.Activities.PokemonActivity;
+import myapps.wycoco.com.mynewpokedex.Fragments.PokemonInfoFragment;
 import myapps.wycoco.com.mynewpokedex.Models.PokemonDataModel;
 import myapps.wycoco.com.mynewpokedex.R;
 
@@ -51,7 +54,7 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
 
         Glide.with(mContext).load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.get(position).getNumber()+".png").into(holder.pokeImage);
         holder.pokeName.setText(pokemon.get(position).getPokeName());
-//        holder.pokeNo.setText(pokemon.get(position).getPokeNo());
+        holder.pokeNo.setText(pokemon.get(position).getPokeNo());
 
     }
 
@@ -81,29 +84,31 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
                 public void onClick(View view) {
 
                     String pokeName = pokemon.get(getAdapterPosition()).getPokeName();
-                    String pokeID = pokemon.get(getAdapterPosition()).getPokeNo();
+                    int pokeID = pokemon.get(getAdapterPosition()).getNumber();
                     String pokeWeight = pokemon.get(getAdapterPosition()).getPokeWeight();
                     String pokeHeight = pokemon.get(getAdapterPosition()).getPokeHeight();
                     String pokeType= pokemon.get(getAdapterPosition()).getPokeType();
                     String pokeVersion = pokemon.get(getAdapterPosition()).getPokeVersion();
-                    String pokeImage = pokemon.get(getAdapterPosition()).getPokeImage();
+                    String pokeImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.get(getAdapterPosition()).getNumber()+".png";
+                    FragmentManager fm = ((AppCompatActivity) mContext).getSupportFragmentManager();
 
-
-
-                    Intent n = new Intent(mContext, PokemonActivity.class);
-                    n.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                    PokemonInfoFragment pk = new PokemonInfoFragment();
+                    Toast.makeText(mContext, "a" + pokeID, Toast.LENGTH_SHORT).show();
                     Bundle args = new Bundle();
                     args.putString("pokeName", pokeName);
-                    args.putString("pokeNo", pokeID);
+                    args.putInt("pokeNo", pokeID);
                     args.putString("pokeImage", pokeImage);
-                    args.putString("pokeWeight", pokeWeight);
-                    args.putString("pokeHeight", pokeHeight);
-                    args.putString("pokeType", pokeType);
-                    args.putString("pokeVersion", pokeVersion);
-                    n.putExtras(args);
+//                    args.putString("pokeWeight", pokeWeight);
+//                    args.putString("pokeHeight", pokeHeight);
+//                    args.putString("pokeType", pokeType);
+//                    args.putString("pokeVersion", pokeVersion);
+                    pk.setArguments(args);
 
-                    mContext.startActivity(n);
+                    fm.beginTransaction().replace(R.id.activityFrame, pk)
+                            .addToBackStack("pokeInfo")
+                            .commit();
+
+
                 }
             });
         }

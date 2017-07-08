@@ -86,49 +86,7 @@ public class PokemonDataFragment extends Fragment {
                                 pokemonDataModel.setPokeName(pokemon.getString("name").toUpperCase());
                                 pokemonDataModel.setUrl(pokemon.getString("url"));
 
-                                JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.GET, pokeUrl,
-                                        new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                try{
-                                                    if(response != null)
-                                                    progressBar.setVisibility(View.GONE);
 
-                                                    JSONObject jsonObject = response.getJSONObject("sprites");
-                                                    JSONArray jsonArray1 = response.getJSONArray("types");
-                                                    String pokeImage = jsonObject.getString("front_default");
-                                                    Log.e("Kirsten", "naabot diri2");
-                                                    pokemonDataModel.setPokeImage(pokeImage);
-                                                    pokemonDataModel.setPokeNo(response.getString("id"));
-                                                    for (int o = 0; o < jsonArray1.length(); o++) {
-                                                        JSONObject pokemonmon = jsonArray1.getJSONObject(o);
-
-                                                        JSONObject jsonObject4 = pokemonmon.getJSONObject("type");
-                                                        String pokeType = jsonObject4.getString("name").toUpperCase();
-                                                        pokemonDataModel.setPokeType(pokeType);
-                                                        Log.e("Me", pokemonDataModel.getPokeType());
-                                                    }
-                                                    pokemonDataModel.setPokeWeight(response.getString("weight"));
-                                                    pokemonDataModel.setPokeHeight(response.getString("height"));
-                                                    pokemonDataModel.setPokeVersion("");
-                                                    Log.e("Kirsten", pokemonDataModel.getPokeImage());
-
-                                                }catch (JSONException e){
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-//                                                Toast.makeText(getContext(), "There is no connection!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                );
-                                Log.e("Kirsten", "naabot diri");
-
-
-                                VolleySingleton.getInstance().addToRequestQueue(jsonObjectRequest2);
                                 pokemonsters.add(pokemonDataModel);
                                 pokemonDataAdapter = new PokemonDataAdapter(getContext(), pokemonsters);
                                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -152,6 +110,7 @@ public class PokemonDataFragment extends Fragment {
                                                     Log.e("YAWA1", visibleCount + "");
                                                     Log.e("YAWA2", totalItemCount + "");
                                                     Log.e("YAWA3", pastVisibleItems + "");
+                                                    progressBar.setVisibility(View.VISIBLE);
 
                                                         offset += 20;
                                                         JsonObjectRequest jsonObjectRequest3 = new JsonObjectRequest(Request.Method.GET, "http://pokeapi.co/api/v2/pokemon/?offset=" + offset,
@@ -159,7 +118,8 @@ public class PokemonDataFragment extends Fragment {
                                                                     @Override
                                                                     public void onResponse(JSONObject response) {
                                                                         Log.e("YAAWA 2", "" + totalItemCount);
-
+                                                                        if(response != null)
+                                                                            progressBar.setVisibility(View.GONE);
                                                                         try {
                                                                             JSONArray jsonArray = response.getJSONArray("results");
                                                                             final String nxtUrl = response.getString("next");
@@ -224,8 +184,5 @@ public class PokemonDataFragment extends Fragment {
         ));
     }
 
-    public void setView(ArrayList<PokemonDataModel> pokemon){
-
-    }
 
 }
