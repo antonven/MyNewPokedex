@@ -63,6 +63,7 @@ public class PokemonActivity extends AppCompatActivity {
 //        String id = intent.getStringExtra("pokeID");
 //        int pokeID = intent.getIntExtra("pokeID", 0);
 
+
         Glide.with(this).load(image).into(pokeImage);
         pokeName.setText(name);
 //        pokeNo.setText(no);
@@ -70,5 +71,6 @@ public class PokemonActivity extends AppCompatActivity {
         pokeWeight.setText(weight + " kg");
         pokeHeight.setText(height + " cm");
         pokeVersion.setText(image);
+
     }
 }

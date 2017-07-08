@@ -160,19 +160,18 @@ public class PokemonDataFragment extends Fragment {
                                                                     public void onResponse(JSONObject response) {
                                                                         Log.e("YAAWA 2", "" + totalItemCount);
 
-//                                                                        if (response != null)
-
                                                                         try {
                                                                             JSONArray jsonArray = response.getJSONArray("results");
                                                                             final String nxtUrl = response.getString("next");
 
                                                                             for (int i = 0; i < jsonArray.length(); i++) {
                                                                                 JSONObject pokemon = jsonArray.getJSONObject(i);
-                                                                                String pokeUrl = pokemon.getString("url");
+
                                                                                 Log.e("Kirsten", "naabot diri");
                                                                                 PokemonDataModel pokemonDataModel = new PokemonDataModel();
 
                                                                                 pokemonDataModel.setPokeName(pokemon.getString("name").toUpperCase());
+                                                                                pokemonDataModel.setUrl(pokemon.getString("url"));
                                                                                 pokemonsters.add(pokemonDataModel);
                                                                                 pokemonDataAdapter = new PokemonDataAdapter(getContext(), pokemonsters);
                                                                                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
