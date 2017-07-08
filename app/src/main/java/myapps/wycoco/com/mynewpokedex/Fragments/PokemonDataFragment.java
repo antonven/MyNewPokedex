@@ -2,6 +2,7 @@ package myapps.wycoco.com.mynewpokedex.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.BoolRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +43,8 @@ public class PokemonDataFragment extends Fragment {
     PokemonDataAdapter pokemonDataAdapter;
     RequestQueue requestQueue;
     ProgressBar progressBar;
+    boolean b = true;
+    int offset = 0;
     ArrayList<PokemonDataModel> pokemonsters = new ArrayList<>();
 
     public PokemonDataFragment() {
@@ -72,7 +75,7 @@ public class PokemonDataFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try{
                             JSONArray jsonArray = response.getJSONArray("results");
-                            String nxtUrl = response.getString("next");
+                            final String nxtUrl = response.getString("next");
 
                             for(int i = 0; i<jsonArray.length(); i++){
                                 JSONObject pokemon = jsonArray.getJSONObject(i);
@@ -122,13 +125,82 @@ public class PokemonDataFragment extends Fragment {
                                         }
                                 );
                                 Log.e("Kirsten", "naabot diri");
+
+
                                 VolleySingleton.getInstance().addToRequestQueue(jsonObjectRequest2);
                                 pokemonsters.add(pokemonDataModel);
                                 pokemonDataAdapter = new PokemonDataAdapter(getContext(), pokemonsters);
-                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                                final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                                 recView.setLayoutManager(layoutManager);
                                 recView.setItemAnimator(new DefaultItemAnimator());
                                 recView.setAdapter(pokemonDataAdapter);
+
+                                recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                    @Override
+                                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                        super.onScrolled(recyclerView, dx, dy);
+                                        if(dy > 0){
+                                            int visibleCount = layoutManager.getChildCount();
+                                            final int totalItemCount = layoutManager.getItemCount();
+                                            int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+
+
+                                            if(b){
+                                                if((visibleCount + pastVisibleItems) >= totalItemCount){
+                                                    b = false;
+                                                    Log.e("YAWA1", visibleCount + "");
+                                                    Log.e("YAWA2", totalItemCount + "");
+                                                    Log.e("YAWA3", pastVisibleItems + "");
+
+                                                        offset += 20;
+                                                        JsonObjectRequest jsonObjectRequest3 = new JsonObjectRequest(Request.Method.GET, "http://pokeapi.co/api/v2/pokemon/?offset=" + offset,
+                                                                new Response.Listener<JSONObject>() {
+                                                                    @Override
+                                                                    public void onResponse(JSONObject response) {
+                                                                        Log.e("YAAWA 2", "" + totalItemCount);
+
+//                                                                        if (response != null)
+
+                                                                        try {
+                                                                            JSONArray jsonArray = response.getJSONArray("results");
+                                                                            final String nxtUrl = response.getString("next");
+
+                                                                            for (int i = 0; i < jsonArray.length(); i++) {
+                                                                                JSONObject pokemon = jsonArray.getJSONObject(i);
+                                                                                String pokeUrl = pokemon.getString("url");
+                                                                                Log.e("Kirsten", "naabot diri");
+                                                                                PokemonDataModel pokemonDataModel = new PokemonDataModel();
+
+                                                                                pokemonDataModel.setPokeName(pokemon.getString("name").toUpperCase());
+                                                                                pokemonsters.add(pokemonDataModel);
+                                                                                pokemonDataAdapter = new PokemonDataAdapter(getContext(), pokemonsters);
+                                                                                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                                                                                recView.setLayoutManager(layoutManager);
+                                                                                recView.setItemAnimator(new DefaultItemAnimator());
+                                                                                recView.setAdapter(pokemonDataAdapter);
+
+                                                                            }
+                                                                        } catch (JSONException f) {
+                                                                            f.printStackTrace();
+                                                                        }
+
+                                                                    }
+                                                                },
+                                                                new Response.ErrorListener() {
+                                                                    @Override
+                                                                    public void onErrorResponse(VolleyError error) {
+
+                                                                    }
+                                                                }
+                                                        );
+                                                        VolleySingleton.getInstance().addToRequestQueue(jsonObjectRequest3);
+                                                        Log.e("wawadasdsad", "" + offset);
+                                                        b = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
 
                             }
                         }catch (JSONException e){
@@ -150,6 +222,10 @@ public class PokemonDataFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
+    }
+
+    public void setView(ArrayList<PokemonDataModel> pokemon){
+
     }
 
 }

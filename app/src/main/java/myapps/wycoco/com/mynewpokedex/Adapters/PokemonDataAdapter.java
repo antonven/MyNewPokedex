@@ -28,6 +28,7 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
     Context mContext;
     ArrayList<PokemonDataModel> pokemon;
     RecyclerView recyclerView;
+    off set;
 
     public PokemonDataAdapter() {
     }
@@ -35,6 +36,7 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
     public PokemonDataAdapter(Context mContext, ArrayList<PokemonDataModel> pokemon) {
         this.mContext = mContext;
         this.pokemon = pokemon;
+        this.set = set;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
     @Override
     public void onBindViewHolder(PokemonDataAdapter.ViewHolder holder, int position) {
 
-        Glide.with(mContext).load(pokemon.get(position).getPokeImage()).into(holder.pokeImage);
+        Glide.with(mContext).load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.get(position).getNumber()+".png").into(holder.pokeImage);
         holder.pokeName.setText(pokemon.get(position).getPokeName());
 //        holder.pokeNo.setText(pokemon.get(position).getPokeNo());
 
@@ -106,5 +108,8 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
                 }
             });
         }
+    }
+    public interface off{
+        public void ioff();
     }
 }

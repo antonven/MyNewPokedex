@@ -13,8 +13,9 @@ public class PokemonDataModel {
     private String pokeWeight;
     private String pokeHeight;
     private String pokeVersion;
+    private String url;
 
-    public PokemonDataModel(String pokeNo, String pokeName, String pokeImage, String pokeType, String pokeWeight, String pokeHeight, String pokeVersion) {
+    public PokemonDataModel(String pokeNo, String pokeName, String pokeImage, String pokeType, String pokeWeight, String pokeHeight, String pokeVersion, String url) {
         this.pokeNo = pokeNo;
         this.pokeName = pokeName;
         this.pokeImage = pokeImage;
@@ -22,6 +23,7 @@ public class PokemonDataModel {
         this.pokeWeight = pokeWeight;
         this.pokeHeight = pokeHeight;
         this.pokeVersion = pokeVersion;
+        this.url = url;
     }
 
     public PokemonDataModel() {
@@ -83,7 +85,7 @@ public class PokemonDataModel {
         this.pokeVersion = pokeVersion;
     }
 
-    public int getNumber(String url) {
+    public int getNumber() {
         String[] urlParse = url.split("/");
         return Integer.parseInt(urlParse[urlParse.length - 1]);
     }
