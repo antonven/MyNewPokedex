@@ -85,6 +85,10 @@ public class PokemonDataModel {
         this.pokeVersion = pokeVersion;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public int getNumber() {
         String[] urlParse = url.split("/");
         return Integer.parseInt(urlParse[urlParse.length - 1]);

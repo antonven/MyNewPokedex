@@ -88,8 +88,6 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
                     String pokeVersion = pokemon.get(getAdapterPosition()).getPokeVersion();
                     String pokeImage = pokemon.get(getAdapterPosition()).getPokeImage();
 
-                    PokemonDataModel pm = new PokemonDataModel(pokeID, pokeName, pokeImage, pokeType, pokeWeight, pokeHeight, pokeVersion);
-                    pokemon.add(pm);
 
 
                     Intent n = new Intent(mContext, PokemonActivity.class);
@@ -104,6 +102,7 @@ public class PokemonDataAdapter extends RecyclerView.Adapter<PokemonDataAdapter.
                     args.putString("pokeType", pokeType);
                     args.putString("pokeVersion", pokeVersion);
                     n.putExtras(args);
+
                     mContext.startActivity(n);
                 }
             });

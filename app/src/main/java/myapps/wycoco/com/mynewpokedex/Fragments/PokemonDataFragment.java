@@ -84,6 +84,7 @@ public class PokemonDataFragment extends Fragment {
                                 final PokemonDataModel pokemonDataModel = new PokemonDataModel();
 
                                 pokemonDataModel.setPokeName(pokemon.getString("name").toUpperCase());
+                                pokemonDataModel.setUrl(pokemon.getString("url"));
 
                                 JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.GET, pokeUrl,
                                         new Response.Listener<JSONObject>() {
