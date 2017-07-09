@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import myapps.wycoco.com.mynewpokedex.Fragments.ItemsFragment;
 import myapps.wycoco.com.mynewpokedex.Fragments.PokemonDataFragment;
 import myapps.wycoco.com.mynewpokedex.R;
 
@@ -38,13 +39,20 @@ public class PokedexActivity extends AppCompatActivity {
             fm = getSupportFragmentManager();
             fm.beginTransaction()
                     .replace(R.id.activityFrame, new PokemonDataFragment())
+                    .addToBackStack("two")
                     .commit();
         }
         if(id == R.id.berries){
             label.setText("Berries");
         }
         if(id == R.id.items){
-            label.setText("My Items");
+//            label.setText("My Items");
+            setTitle("My Items");
+            fm = getSupportFragmentManager();
+            fm.beginTransaction()
+                    .replace(R.id.activityFrame, new ItemsFragment())
+                    .addToBackStack("one")
+                    .commit();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="#32070A"
     >
 
     <RelativeLayout
@@ -17,37 +17,29 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/imageView2"
-            android:layout_alignStart="@+id/imageView2"
-            android:layout_marginLeft="29dp"
+            android:layout_marginLeft="25dp"
+            android:background="#fff"
             android:paddingRight="10dp"
-            android:layout_marginStart="29dp" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/imageView2"
-            android:layout_alignTop="@+id/imageView"
+            android:layout_marginStart="25dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/pokeball"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/pokeName"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:textColor="#fff"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="BALBASAUR"
             android:textSize="26dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginLeft="21dp"
+            android:layout_marginStart="21dp" />
 
         <TextView
             android:id="@+id/a"
@@ -58,9 +50,9 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:text="Type: "
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_below="@+id/pokeName" />
+            android:layout_below="@+id/pokeName"
+            android:layout_alignLeft="@+id/pokeName"
+            android:layout_alignStart="@+id/pokeName" />
         <TextView
             android:id="@+id/pokeType"
             android:layout_width="wrap_content"
@@ -84,8 +76,8 @@
             android:text="Weight: "
             android:id="@+id/s"
             android:layout_below="@+id/a"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_alignLeft="@+id/a"
+            android:layout_alignStart="@+id/a" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,8 +100,8 @@
             android:textStyle="bold"
             android:id="@+id/d"
             android:layout_below="@+id/s"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_alignLeft="@+id/s"
+            android:layout_alignStart="@+id/s" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

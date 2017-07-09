@@ -106,10 +106,9 @@ public class PokemonInfoFragment extends Fragment {
 
 
                                     }
-
                                 }
                                 pokeHeight.setText(height + " cm");
-                                pokeWeight.setText(weight + " kg");
+                                pokeWeight.setText(weight + " lbs");
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
