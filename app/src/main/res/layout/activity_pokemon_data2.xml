@@ -141,8 +141,8 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/frameLayout">
 
-            <ListView
-                android:id="@+id/listView1"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />

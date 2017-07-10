@@ -11,6 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import myapps.wycoco.com.mynewpokedex.Adapters.MovesAdapter;
 import myapps.wycoco.com.mynewpokedex.R;
 import myapps.wycoco.com.mynewpokedex.Volley.VolleySingleton;
 
@@ -51,9 +55,9 @@ public class PokemonInfoFragment extends Fragment {
     ImageView pokemonImage;
     int id;
     ArrayList<String> arrayList;
-    ArrayAdapter<String> movesList;
-    ListView listView;
-
+    MovesAdapter movesAdapter;
+    RecyclerView recView3;
+    LinearLayoutManager linearLayoutManager;
 
     @Nullable
     @Override
@@ -70,10 +74,11 @@ public class PokemonInfoFragment extends Fragment {
         pokeVersion = (TextView)v. findViewById(R.id.pokeVersion);
 
         arrayList = new ArrayList<String>();
-        movesList = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, arrayList);
-        listView = (ListView)v.findViewById(R.id.listView1);
+        movesAdapter = new MovesAdapter(getContext(), arrayList);
+//        movesList = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        recView3 = (RecyclerView) v.findViewById(R.id.recView3);
 
-
+        linearLayoutManager = new LinearLayoutManager(getContext());
 
         if(getArguments() != null){
             String image = getArguments().getString("pokeImage");
@@ -157,9 +162,10 @@ public class PokemonInfoFragment extends Fragment {
                                 String movemove = moves.getString("name");
 
                                 arrayList.add(movemove);
-
-                                movesList.notifyDataSetChanged();
-                                listView.setAdapter(movesList);
+                                recView3.setLayoutManager(linearLayoutManager);
+                                recView3.setItemAnimator(new DefaultItemAnimator());
+                                movesAdapter.notifyDataSetChanged();
+                                recView3.setAdapter(movesAdapter);
 
                             }
                         } catch (JSONException e) {
