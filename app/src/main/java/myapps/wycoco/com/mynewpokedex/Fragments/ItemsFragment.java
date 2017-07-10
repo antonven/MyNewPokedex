@@ -58,15 +58,17 @@ public class ItemsFragment extends Fragment {
         recView = (RecyclerView) v.findViewById(R.id.recView);
         progressBar = (ProgressBar)v.findViewById(R.id.progressBar);
 
-        JsonRequest(v, offset);
-        loadMore(v);
+
+
+        JsonRequest(v);
+
         boy = true;
 
         return v;
     }
 
 
-    public void JsonRequest(final View view, int offset){
+    public void JsonRequest(final View view){
 
         JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, "http://pokeapi.co/api/v2/item/?offset=" + offset + "/",
                 new Response.Listener<JSONObject>() {
@@ -78,7 +80,7 @@ public class ItemsFragment extends Fragment {
                         try {
                             JSONArray jsonArray1 = response.getJSONArray("results");
                             Log.e("asda", "naabot driir" + jsonArray1);
-                            for(int p = 0; p <= jsonArray1.length(); p++) {
+                            for(int p = 0; p < jsonArray1.length(); p++) {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(p);
                                 itemUrl = jsonObject1.getString("url");
                                 itemName = jsonObject1.getString("name");
@@ -118,7 +120,33 @@ public class ItemsFragment extends Fragment {
 
                                 VolleySingleton.getInstance().addToRequestQueue(jsonObjectRequest2);
                                 items.add(itemModel);
-                                loadMore(view);
+                                itemAdapter = new ItemAdapter(getContext(), items);
+                                final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                                recView.setLayoutManager(layoutManager);
+                                recView.setItemAnimator(new DefaultItemAnimator());
+                                recView.setAdapter(itemAdapter);
+
+                                recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                    @Override
+                                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                        super.onScrolled(recyclerView, dx, dy);
+                                        if(dy > 0){
+                                            int visibleCount = layoutManager.getChildCount();
+                                            final int totalItemCount = layoutManager.getItemCount();
+                                            int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+
+                                            if (visibleCount + pastVisibleItems >= totalItemCount) {
+                                                boy = false;
+                                                offset += 20;
+
+//                                                JsonRequest(view);
+                                                boy = true;
+//                        Toast.makeText(getContext(), "Last", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        }
+                                    }
+                                });
                             }
 
 
@@ -137,35 +165,36 @@ public class ItemsFragment extends Fragment {
 
     }
 
-    private void loadMore(final View view){
-
-        itemAdapter = new ItemAdapter(getContext(), items);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recView.setLayoutManager(layoutManager);
-        recView.setItemAnimator(new DefaultItemAnimator());
-        recView.setAdapter(itemAdapter);
-
-        recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if(dy > 0){
-                    int visibleCount = layoutManager.getChildCount();
-                    final int totalItemCount = layoutManager.getItemCount();
-                    int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
-
-                    if (visibleCount + pastVisibleItems >= totalItemCount) {
-                        boy = false;
-                        offset += 20;
-
-                        JsonRequest(view, offset);
-                        boy = true;
-//                        Toast.makeText(getContext(), "Last", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            }
-        });
-    }
+//    private void loadMore(final View view, final int set){
+//
+//        itemAdapter = new ItemAdapter(getContext(), items);
+//        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        recView.setLayoutManager(layoutManager);
+//        recView.setItemAnimator(new DefaultItemAnimator());
+//        recView.setAdapter(itemAdapter);
+//
+//        recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if(dy > 0){
+//                    int visibleCount = layoutManager.getChildCount();
+//                    final int totalItemCount = layoutManager.getItemCount();
+//                    int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+//
+//                    if (visibleCount + pastVisibleItems >= totalItemCount) {
+//                        boy = false;
+//                        int offset = set;
+//                        offset += 20;
+//
+//                        JsonRequest(view, offset);
+//                        boy = true;
+////                        Toast.makeText(getContext(), "Last", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                }
+//            }
+//        });
+//    }
 
 }

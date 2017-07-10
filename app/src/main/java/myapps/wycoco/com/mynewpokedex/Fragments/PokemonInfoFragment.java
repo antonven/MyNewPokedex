@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import myapps.wycoco.com.mynewpokedex.R;
 import myapps.wycoco.com.mynewpokedex.Volley.VolleySingleton;
@@ -46,6 +50,9 @@ public class PokemonInfoFragment extends Fragment {
     TextView pokeNo, pokeName, pokeType, pokeWeight, pokeHeight, pokeVersion;
     ImageView pokemonImage;
     int id;
+    ArrayList<String> arrayList;
+    ArrayAdapter<String> movesList;
+    ListView listView;
 
 
     @Nullable
@@ -62,6 +69,9 @@ public class PokemonInfoFragment extends Fragment {
         pokeHeight = (TextView)v. findViewById(R.id.pokeHeight);
         pokeVersion = (TextView)v. findViewById(R.id.pokeVersion);
 
+        arrayList = new ArrayList<String>();
+        movesList = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        listView = (ListView)v.findViewById(R.id.listView1);
 
 
 
@@ -109,6 +119,7 @@ public class PokemonInfoFragment extends Fragment {
                                 }
                                 pokeHeight.setText(height + " cm");
                                 pokeWeight.setText(weight + " lbs");
+                                JsonRequestMoves();
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
@@ -128,5 +139,42 @@ public class PokemonInfoFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
+    }
+
+    private void JsonRequestMoves(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://pokeapi.co/api/v2/pokemon/" + id + "/",
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if(response != null)
+
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("moves");
+
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject move = jsonArray.getJSONObject(i);
+                                JSONObject moves = move.getJSONObject("move");
+                                String movemove = moves.getString("name");
+
+                                arrayList.add(movemove);
+
+                                movesList.notifyDataSetChanged();
+                                listView.setAdapter(movesList);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        VolleySingleton.getInstance().addToRequestQueue(jsonObjectRequest);
+
     }
 }

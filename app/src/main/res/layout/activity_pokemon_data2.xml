@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#32070A"
+    android:background="#0E1754"
     >
 
     <RelativeLayout
@@ -123,6 +123,32 @@
             <!--android:layout_below="@+id/pokeHeight"-->
             <!--android:layout_toRightOf="@+id/imageView"-->
             <!--android:layout_toEndOf="@+id/imageView" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moves"
+            android:textSize="24dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_above="@+id/frameLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="21dp" />
+        <FrameLayout
+            android:layout_width="250dp"
+            android:layout_height="260dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/frameLayout">
+
+            <ListView
+                android:id="@+id/listView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </FrameLayout>
     </RelativeLayout>
 
 

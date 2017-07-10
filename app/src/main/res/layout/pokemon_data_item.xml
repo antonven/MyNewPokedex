@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="12dp"
     tools:context="myapps.wycoco.com.mynewpokedex.Fragments.PokemonDataFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -20,44 +21,44 @@
                 android:id="@+id/pokeballImage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/pokeball"/>
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:src="@drawable/pokeball" />
 
             <TextView
+                android:id="@+id/pokeNo"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="2dp"
-                android:text="800"
-                android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/pokeballImage"
                 android:layout_toEndOf="@+id/pokeballImage"
-                android:id="@+id/pokeNo" />
+                android:layout_toRightOf="@+id/pokeballImage"
+                android:gravity="center_vertical"
+                android:text="800" />
 
             <TextView
-                android:text="BALBASAUR"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textSize="20dp"
+                android:id="@+id/pokeName"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/pokeballImage"
-                android:layout_toRightOf="@+id/pokeNo"
                 android:layout_toEndOf="@+id/pokeNo"
-                android:id="@+id/pokeName" />
+                android:layout_toRightOf="@+id/pokeNo"
+                android:gravity="center_vertical"
+                android:text="BALBASAUR"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/pokeImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="16dp" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="10dp" />
 
 
         </RelativeLayout>
